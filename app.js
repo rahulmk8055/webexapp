@@ -10,12 +10,12 @@ mongoose.Promise = global.Promise;
 
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var pullRouter = require('./routes/pull');
 var countsRouter = require('./routes/counts')
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/webexapp:27017')
+mongoose.connect('mongodb+srv://myself:rahul1234@cluster0.lvek5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
@@ -27,10 +27,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/',express.static(path.join(__dirname, 'public')));
+// app.use('/test', express.static('public'));
 app.use('/hello', indexRouter);
-app.use('/getcount', usersRouter);
+app.use('/getcount', pullRouter);
 app.use('/savecount', countsRouter);
 
 // catch 404 and forward to error handler
