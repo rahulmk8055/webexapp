@@ -24,7 +24,7 @@ countController.get = async(req, res) =>{
     try {
     const totalCount = await Count.countDocuments({
         MeetingId: meetingid,
-        updated_at : { $lt:Date.now(), $gt: (Date.now()-3000)}
+        updated_at : { $lt:Date.now(), $gt: (Date.now()-10000)}
         // updated_at : "1631708183364"
     })
     console.log(totalCount);
